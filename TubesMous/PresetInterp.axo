@@ -1,0 +1,29 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="PresetInterp" uuid="a410d9ad-3fc1-4c45-901b-057690856074">
+      <sDescription>Interpolates two presets and is a preset</sDescription>
+      <author>Thierry Rochebois</author>
+      <license>LGPL</license>
+      <inlets>
+         <frac32.positive name="alpha"/>
+      </inlets>
+      <outlets/>
+      <displays/>
+      <params/>
+      <attribs>
+         <objref name="preset0"/>
+         <objref name="preset1"/>
+         <spinner name="size" MinValue="0" MaxValue="256" DefaultValue="0"/>
+      </attribs>
+      <code.declaration><![CDATA[int32_t g[attr_size];
+
+int32_t* get(){
+	return g;
+}
+int32_t size(){
+	return attr_size;
+}]]></code.declaration>
+      <code.krate><![CDATA[for(int i=0;i<attr_size;i++){
+	g[i]=___SMMLA(inlet_alpha, attr_preset1.get()[i]-attr_preset0.get()[i],attr_preset0.get()[i]>>5)<<5;
+}]]></code.krate>
+   </obj.normal>
+</objdefs>

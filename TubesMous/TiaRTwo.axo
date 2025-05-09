@@ -1,0 +1,273 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="TiaRTwo" uuid="c3a89b57-84b5-4147-81b0-eae3e8272768">
+      <author>Smashed Transistors</author>
+      <license>LGPL</license>
+      <helpPatch>gen.axh</helpPatch>
+      <inlets>
+         <frac32buffer name="in1"/>
+         <frac32buffer name="in2"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="out"/>
+      </outlets>
+      <displays/>
+      <params/>
+      <attribs>
+         <text name="function"/>
+         <combo name="size">
+            <MenuEntries>
+               <string>256</string>
+               <string>512</string>
+               <string>1024</string>
+               <string>2048</string>
+               <string>4096</string>
+               <string>8192</string>
+               <string>16384</string>
+               <string>32768</string>
+               <string>65536</string>
+               <string>16</string>
+               <string>32</string>
+               <string>64</string>
+               <string>128</string>
+            </MenuEntries>
+            <CEntries>
+               <string>8</string>
+               <string>9</string>
+               <string>10</string>
+               <string>11</string>
+               <string>12</string>
+               <string>13</string>
+               <string>14</string>
+               <string>15</string>
+               <string>16</string>
+               <string>4</string>
+               <string>5</string>
+               <string>6</string>
+               <string>7</string>
+            </CEntries>
+         </combo>
+         <combo name="location">
+            <MenuEntries>
+               <string>IntRAM</string>
+               <string>ExtRAM</string>
+            </MenuEntries>
+            <CEntries>
+               <string>0</string>
+               <string>1</string>
+            </CEntries>
+         </combo>
+         <objref name="preset"/>
+      </attribs>
+      <code.declaration><![CDATA[#if attr_location == 0
+	#define LOCATION
+#else
+	#define LOCATION  __attribute__ ((section (".sdram")))
+#endif
+static const uint32_t LENGTHPOW = attr_size;
+static const uint32_t LENGTH = 1<<attr_size;
+static const uint32_t LENGTHMASK = (1<<attr_size)-1;
+int32_t g[10];
+float mod[10];
+float *v;
+int ind=0;
+
+
+
+
+static float rnd(float x) {return (((((int32_t)(x))*69069+1)*69069+1)*69069)>0 ? 1 : -1;}
+static float rndf(float x) {return arm::q_to_float(((arm::float_to_q(x,31)*69069+1)*69069+1)*69069,31);}
+static float mod1(float x) { return (x + 128) - ((int)(x + 128)); }
+static float saw(float x){ return 2 * mod1(x) - 1; }
+static float rect(float x,float r) {x = mod1(x); return x < r ? -1 : 1;}
+static float sqr(float x) {return rect(x, 0.5f); }
+static float tri(float x,float r){ // r: cyclic ratio 0.5f => middle
+  x = mod1(x);
+  if(x < r) return -1 + (2 * x / r);
+  else      return 1 - 2 * (x - r) / (1.0f - r);
+}
+static float tri(float x){ return tri(x,0.5f); }
+static float cos1(float x, float r){ x = tri(x, r); return -x * (1.5708f + x*x * (-0.6422f +0.0714f * x*x));      }
+static float cos1(float x){ return cos1(x, 0.5f);      }
+static float sin1(float x){ return cos1(x-0.25f); } 
+  
+static float clip(float x){ return x > 1.0f ? 1.0f : x < -1.0f ? -1.0f : x;}
+static float sat(float x){ x = clip(x); return x * (1.5f - 0.5f * x * x);     }
+static float pow(float x, int N){
+  float y = 1.0f;
+  if(N >= 0)
+    for(int i = 0; i <  N; i++) y *=  x;
+  else { float _x = 1.0f / x;
+    for(int i = 0; i < -N; i++) y *= _x;  
+  }
+  return y;
+}
+static float exp1(float x) {
+  x = 1 + x * (1 / 256.0f);
+  x *= x; x *= x; x *= x; x *= x;
+  x *= x; x *= x; x *= x; x *= x;
+  return x;
+}
+static float exp(float x){
+  float coef = 1;
+  while(x > 1){ x-=1.0f; coef *=     2.718281828f; }
+  while(x < 0){ x+=1.0f; coef *= 1 / 2.718281828f; }
+  return exp1(x) * coef;
+}
+static float hann(float x){ return 0.5f - 0.5f * cos1(x); }
+static float quant(float x, float step) {     
+  return (((int)(x / step + 100.5f)) - 100) * step;
+}
+/*
+ xfade(w, tri(x*(1+5*w)), sin1(x*(1+5*w)))
+ higher order can be used for segments
+ xfade(x,1,0.1f,0,0,0) // pulsaw
+*/
+static float xf(float x, float v0, float v1){
+  return v0 + x * (v1 - v0);
+}
+static float xfade(float x, float v0, float v1){
+  if(x<=0) return v0;
+  if(x>=1) return v1;
+  return v0 + x * (v1 - v0);
+}
+static float xfade(float x, float v0, float v1, float v2){
+  if(x<=0) return v0;
+  if(x>=1) return v2;
+  return x < 0.5f ? 
+  xf( x      *2, v0, v1)
+: xf((x-0.5f)*2, v1, v2);
+}
+static float xfade(float x, float v0, float v1, float v2, float v3){
+  if(x<=0) return v0;
+  if(x>=1) return v3;
+return 
+x < 1.0f/3 ? 
+  xf(x*3, v0, v1)
+: (x < 2.0f/3 ?
+     xf((x-1.0f/3)*3, v1, v2)
+   : xf((x-2.0f/3)*3, v2, v3));
+}
+static float xfade(float x, float v0, float v1, float v2, float v3, float v4){
+  if(x<=0) return v0;
+  if(x>=1) return v4;
+  if(x < 0.25f) return xf( x          * 4, v0, v1);
+  if(x < 0.50f) return xf((x - 0.25f) * 4, v1, v2);
+  if(x < 0.75f) return xf((x - 0.50f) * 4, v2, v3);
+  return               xf((x - 0.75f) * 4, v3, v4);
+}
+static float xfade(float x, float v0, float v1, float v2, float v3, float v4, float v5){
+  if(x<=0) return v0;
+  if(x>=1) return v5;
+  if(x < 0.2f) return xf( x         * 5, v0, v1);
+  if(x < 0.4f) return xf((x - 0.2f) * 5, v1, v2);
+  if(x < 0.6f) return xf((x - 0.4f) * 5, v2, v3);
+  if(x < 0.8f) return xf((x - 0.6f) * 5, v3, v4);
+  return              xf((x - 0.8f) * 5, v4, v5);
+}
+
+
+float get(int d){return v[(d+ind)&LENGTHMASK];}
+void set(int d, float x){v[(d+ind)&LENGTHMASK]=x;}
+void gain(int d, float g){v[(d+ind)&LENGTHMASK]*=g;}
+void add(int d, float x){v[(d+ind)&LENGTHMASK]+=x;}
+void rot(int pA, int pB, float a){
+	float x=get(pA);
+	float y=get(pB);
+	float c=cos1(a);
+	float s=sin1(a);
+	float nx = x*c-y*s;
+	float ny = x*s+y*c;
+	set(pA,nx);
+	set(pB,ny);
+}
+
+void rot(int pA, int pB, float a, float b, float c, float d){
+	float x=get(pA);
+	float y=get(pB);
+	float an=a+x*b+y*c+x*y*d;
+	float co=cos1(an);
+	float si=sin1(an);
+	float nx = x*co-y*si;
+	float ny = x*si+y*co;
+	set(pA,nx);
+	set(pB,ny);
+}
+void rotThresh(int pA, int pB, float a, float b, float c, float t){
+	float x=get(pA);
+	float y=get(pB);
+	float an=x+y;
+	float san=an>t?t:an<-t?-t:an;
+	an=a+b*an+c*(an-san);
+	float co=cos1(an);
+	float si=sin1(an);
+	float nx = x*co-y*si;
+	float ny = x*si+y*co;
+	set(pA,nx);
+	set(pB,ny);
+}
+float vlp1=0;
+void lp1(int p, float c){
+	vlp1+=c*(get(p)-vlp1);
+	set(p,vlp1);
+}
+float vhp1=0;
+void hp1(int p, float c){
+	float x=get(p);
+	vhp1+=c*(x-vhp1);
+	set(p,x-vhp1);
+}
+
+
+void sat(int p, float t){
+	float x=get(p);
+	if(x>t) x=t;
+	if(x<-t) x=-t;
+	set(p,x);
+}]]></code.declaration>
+      <code.init><![CDATA[static float v_[attr_poly][LENGTH+1] LOCATION;
+#undef LOCATION
+v = &v_[parent->polyIndex][0];
+
+      
+for(int i = 0; i < LENGTH; i++){
+	v[i]=0;
+}]]></code.init>
+      <code.krate><![CDATA[for(int i=0;i<10;i++){
+  g[i]=attr_preset.get()[i];
+  mod[i]=arm::q_to_float(g[i],27);
+}]]></code.krate>
+      <code.srate><![CDATA[ind--;
+ind&=LENGTHMASK;
+float x1=arm::q_to_float(inlet_in1,27);
+float x2=arm::q_to_float(inlet_in2,27);
+float y;
+
+v[ind]=x1;
+
+
+
+
+add(0,x2);
+
+rot( 0,50   ,0.25*mod[0]);
+rot( 3,50- 3,0.25*mod[1]);
+rot( 6,50- 6,0.25*mod[2]);
+rot( 8,50- 8,0.25*mod[3]);
+rot(12,50-12,0.25*mod[4]);
+rot(16,50-16,0.25*mod[5]);
+rot(18,50-18,0.25*mod[6]);
+rot(21,50-21,0.25*mod[7]);
+
+
+
+y=get(25);
+
+lp1(25,0.5f);
+//hp1(25,0.01f);
+gain(25,0.9f);
+
+
+
+outlet_out=arm::float_to_q(y,27);]]></code.srate>
+   </obj.normal>
+</objdefs>
