@@ -1,0 +1,356 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="midi/in/keyb mod" uuid="abcd509d15e7d13d5381203fd2b4d0ac6fe57bb3" name="keyb_1" x="0" y="0">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="sl10s" uuid="1515bb32-3349-16c5-a22c-298378ebcfed" name="sl10s_1" x="126" y="0">
+      <params>
+         <frac32.s.mapvsl name="h1" value="25.0"/>
+         <frac32.s.mapvsl name="h2" value="-10.0"/>
+         <frac32.s.mapvsl name="h3" value="38.0"/>
+         <frac32.s.mapvsl name="h4" value="-7.0"/>
+         <frac32.s.mapvsl name="h5" value="-13.0"/>
+         <frac32.s.mapvsl name="h6" value="47.0"/>
+         <frac32.s.mapvsl name="h7" value="-32.0"/>
+         <frac32.s.mapvsl name="h8" value="28.0"/>
+         <frac32.s.mapvsl name="h9" value="1.0"/>
+         <frac32.s.mapvsl name="h10" value="54.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="midi/in/cc hr i" uuid="72d8018c0f072c469fcd902b0423ba8fd5e6433" name="cc_1" x="406" y="0">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="1"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="math/smooth2" uuid="9ba3ddec912512e6b63211080e89cb25b6d84834" name="smooth2_1" x="490" y="0">
+      <params>
+         <frac32.u.map name="risetime" value="2.0"/>
+         <frac32.u.map name="falltime" value="21.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="disp/dial p" uuid="44fd18b562e434b3230441681132dbeabb15cdc5" name="dial_3" x="574" y="0">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="252" y="28" text="parameter presets"/>
+   <comment type="patch/comment" x="644" y="28" text="&lt;- ModWheel"/>
+   <comment type="patch/comment" x="252" y="42" text="that will be"/>
+   <comment type="patch/comment" x="252" y="56" text="interpolated"/>
+   <comment type="patch/comment" x="252" y="70" text="appear as mod[0]"/>
+   <comment type="patch/comment" x="252" y="84" text="to mod[9] in prog0-3"/>
+   <obj type="sl10s" uuid="1515bb32-3349-16c5-a22c-298378ebcfed" name="sl10s_2" x="126" y="154">
+      <params>
+         <frac32.s.mapvsl name="h1" value="30.0"/>
+         <frac32.s.mapvsl name="h2" value="-7.0"/>
+         <frac32.s.mapvsl name="h3" value="-28.0"/>
+         <frac32.s.mapvsl name="h4" value="9.0"/>
+         <frac32.s.mapvsl name="h5" value="36.0"/>
+         <frac32.s.mapvsl name="h6" value="43.0"/>
+         <frac32.s.mapvsl name="h7" value="29.0"/>
+         <frac32.s.mapvsl name="h8" value="11.0"/>
+         <frac32.s.mapvsl name="h9" value="0.0"/>
+         <frac32.s.mapvsl name="h10" value="53.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="PresetInterp" uuid="a410d9ad-3fc1-4c45-901b-057690856074" name="PresetInterp_1" x="350" y="154">
+      <params/>
+      <attribs>
+         <objref attributeName="preset0" obj="sl10s_1"/>
+         <objref attributeName="preset1" obj="sl10s_2"/>
+         <spinner attributeName="size" value="10"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="508" y="183" text="c&lt;- interpolator"/>
+   <obj type="midi/in/keyb mod" uuid="abcd509d15e7d13d5381203fd2b4d0ac6fe57bb3" name="keyb_2" x="770" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="env/adsr" uuid="d1dbcc5fa6f87b98a6a91c87fd44acee5e690bac" name="adsr_1" x="868" y="238">
+      <params>
+         <frac32.s.map name="a" value="3.0"/>
+         <frac32.s.map name="d" value="55.0"/>
+         <frac32.u.map name="s" value="64.0"/>
+         <frac32.s.map name="r" value="-34.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/*c" uuid="7d5ef61c3bcd571ee6bbd8437ef3612125dfb225" name="*c_1" x="966" y="238">
+      <params>
+         <frac32.u.map name="amp" value="64.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="env/adsr" uuid="d1dbcc5fa6f87b98a6a91c87fd44acee5e690bac" name="adsr_2" x="1078" y="238">
+      <params>
+         <frac32.s.map name="a" value="21.0"/>
+         <frac32.s.map name="d" value="0.0"/>
+         <frac32.u.map name="s" value="64.0"/>
+         <frac32.s.map name="r" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/*" uuid="922423f2db9f222aa3e5ba095778288c446da47a" name="*_2" x="1176" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_3" x="1232" y="238">
+      <params>
+         <frac32.s.map name="pitch" value="5.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/*" uuid="922423f2db9f222aa3e5ba095778288c446da47a" name="*_1" x="1330" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/i radio 4 h" uuid="f87ae81e3162014f3bdca0f56dbbdf9322e69dfd" name="i_1" x="210" y="308">
+      <params>
+         <int32.hradio name="value" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="TiaRTwo" uuid="c3a89b57-84b5-4147-81b0-eae3e8272768" name="TiaRTwo_1" x="448" y="308">
+      <params/>
+      <attribs>
+         <text attributeName="prog0">
+            <sText><![CDATA[add(0,x2);
+
+float x=get(0)+get(50);
+x=nlSegs(x, 
+0   , 0   , 0   , 0   , 0   , 0,
+0,
+0.05 ,0.03, 0.07, 0.1 , 0.0, -0.1);
+rot( 0,50   ,0.25*mod[0]+x);
+
+rot( 3,50- 2,0.25*mod[1]);
+rot( 6,50- 6,0.25*mod[2]);
+rot( 8,50- 8,0.25*mod[3]);
+rot(12,50-12,0.25*mod[4]);
+rot(16,50-16,0.25*mod[5]);
+rot(18,50-17,0.25*mod[6]);
+rot(21,50-21,0.25*mod[7]);
+
+y1=get(25);
+
+lp1(25,0.25f);
+hp1(25,0.01f);
+gain(25,mod[9]);]]></sText>
+         </text>
+         <text attributeName="prog1">
+            <sText><![CDATA[add(0,x2);
+rot( 0,26   ,0.25*mod[0]);
+rot( 2,26- 1,0.25*mod[1]);
+rot( 3,26- 3,0.25*mod[2]);
+rot( 4,26- 4,0.25*mod[3]);
+rot( 6,26- 6,0.25*mod[4]);
+rot( 8,26- 7,0.25*mod[5]);
+rot( 9,26- 8,0.25*mod[6]);
+rot(11,26-11,0.25*mod[7]);
+
+y1=get(13);
+
+lp1(13,0.5f);
+hp1(13,0.01f);
+gain(13,mod[9]);
+]]></sText>
+         </text>
+         <text attributeName="prog2">
+            <sText><![CDATA[add(0,x2);
+rot( 0,100   ,0.25*mod[0]);
+rot( 6,100- 4,0.25*mod[1]);
+rot(12,100-12,0.25*mod[2]);
+rot(16,100-16,0.25*mod[3]);
+rot(24,100-24,0.25*mod[4]);
+rot(32,100-32,0.25*mod[5]);
+rot(36,100-34,0.25*mod[6]);
+rot(42,100-42,0.25*mod[7]);
+
+y1=get(50);
+
+lp1(50,0.5f);
+hp1(50,0.01f);
+gain(50,mod[9]);
+]]></sText>
+         </text>
+         <text attributeName="prog3">
+            <sText><![CDATA[add(0,x2);
+rot( 0,50   ,0.25*mod[0]);
+rot( 7,50- 7,0.25*mod[1]);
+rot( 8,50- 8,0.25*mod[2]);
+rot( 9,50- 9,0.25*mod[3]);
+rot(10,50-10,0.25*mod[4]);
+rot(19,50-19,0.25*mod[5]);
+rot(20,50-20,0.25*mod[6]);
+rot(21,50-21,0.25*mod[7]);
+
+y1=get(25);
+
+lp1(25,0.5f);
+hp1(25,0.01f);
+gain(25,mod[9]);
+]]></sText>
+         </text>
+         <combo attributeName="size" selection="256"/>
+         <combo attributeName="location" selection="IntRAM"/>
+         <objref attributeName="preset" obj="PresetInterp_1"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="378" y="336" text="two inputs"/>
+   <comment type="patch/comment" x="336" y="350" text="appear as x1 and x2"/>
+   <comment type="patch/comment" x="196" y="392" text="&lt;- polyphonic input"/>
+   <comment type="patch/comment" x="196" y="406" text="three detuned"/>
+   <comment type="patch/comment" x="196" y="420" text="sawtooth per voice"/>
+   <comment type="patch/comment" x="294" y="448" text="The max size of the delay line"/>
+   <obj type="mix/mix 1" uuid="26fb1fe4ed25d8bc2ac4a3f91ab6b80ed6d9d4fa" name="mix_1" x="798" y="448">
+      <params>
+         <frac32.u.map name="gain1" value="0.15000000596046448"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="osc/sine" uuid="6e094045cca76a9dbf7ebfa72e44e4700d2b3ba" name="sine_2" x="896" y="448">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 3" uuid="8be16f2156012a4a8974804178cece51555f272b" name="mix_2" x="994" y="448">
+      <params>
+         <frac32.u.map name="gain1" value="64.0"/>
+         <frac32.u.map name="gain2" value="0.0"/>
+         <frac32.u.map name="gain3" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="gain/vca" uuid="a9f2dcd18043e2f47364e45cb8814f63c2a37c0d" name="vca_1" x="1078" y="448">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="308" y="476" text="Points to the preset object"/>
+   <comment type="patch/comment" x="280" y="490" text="Here it is the Preset interpolator"/>
+   <obj type="osc/sine" uuid="6e094045cca76a9dbf7ebfa72e44e4700d2b3ba" name="sine_1" x="0" y="504">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="sss/disp/MIDscope" uuid="e22193bf-a8b3-4166-b583-f3bb50c1b0ee" name="MIDscope_2" x="98" y="504">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="378" y="714">
+      <params>
+         <frac32.u.map name="value" value="50.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="tiar/gain/DCA" uuid="37123bac-a14b-430b-901f-cdecf31d394c" name="DCA_2" x="448" y="714">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="532" y="714">
+      <params/>
+      <attribs/>
+   </obj>
+   <nets>
+      <net>
+         <source obj="keyb_1" outlet="note"/>
+         <dest obj="sine_1" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="sine_1" outlet="wave"/>
+         <dest obj="MIDscope_2" inlet="syncIn"/>
+      </net>
+      <net>
+         <source obj="TiaRTwo_1" outlet="y1"/>
+         <dest obj="MIDscope_2" inlet="in"/>
+         <dest obj="DCA_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="DCA_2" outlet="out"/>
+         <dest obj="out_1" inlet="left"/>
+         <dest obj="out_1" inlet="right"/>
+      </net>
+      <net>
+         <source obj="dial_1" outlet="out"/>
+         <dest obj="DCA_2" inlet="gain"/>
+      </net>
+      <net>
+         <source obj="sine_3" outlet="wave"/>
+         <dest obj="*_1" inlet="a"/>
+      </net>
+      <net>
+         <source obj="cc_1" outlet="midiCC"/>
+         <dest obj="smooth2_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="smooth2_1" outlet="out"/>
+         <dest obj="dial_3" inlet="in"/>
+         <dest obj="PresetInterp_1" inlet="alpha"/>
+      </net>
+      <net>
+         <source obj="i_1" outlet="out"/>
+         <dest obj="TiaRTwo_1" inlet="progSel"/>
+      </net>
+      <net>
+         <source obj="keyb_2" outlet="note"/>
+         <dest obj="mix_1" inlet="bus_in"/>
+      </net>
+      <net>
+         <source obj="keyb_2" outlet="gate"/>
+         <dest obj="adsr_1" inlet="gate"/>
+         <dest obj="adsr_2" inlet="gate"/>
+      </net>
+      <net>
+         <source obj="adsr_1" outlet="env"/>
+         <dest obj="*c_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="sine_2" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="adsr_2" outlet="env"/>
+         <dest obj="*_2" inlet="a"/>
+         <dest obj="*_2" inlet="b"/>
+      </net>
+      <net>
+         <source obj="*_1" outlet="result"/>
+         <dest obj="mix_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="*_2" outlet="result"/>
+         <dest obj="*_1" inlet="b"/>
+      </net>
+      <net>
+         <source obj="*c_1" outlet="out"/>
+         <dest obj="vca_1" inlet="v"/>
+      </net>
+      <net>
+         <source obj="mix_2" outlet="out"/>
+         <dest obj="vca_1" inlet="a"/>
+      </net>
+      <net>
+         <source obj="vca_1" outlet="o"/>
+         <dest obj="TiaRTwo_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="sine_2" outlet="wave"/>
+         <dest obj="mix_2" inlet="in1"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>2078</x>
+      <y>23</y>
+      <width>1695</width>
+      <height>1026</height>
+   </windowPos>
+</patch-1.0>

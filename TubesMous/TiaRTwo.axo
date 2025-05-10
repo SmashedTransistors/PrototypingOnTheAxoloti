@@ -170,6 +170,26 @@ static float xfade(float x, float v0, float v1, float v2, float v3, float v4, fl
   return              xf((x - 0.8f) * 5, v4, v5);
 }
 
+static float nlSegs(float x,float m6, float m5, float m4, float m3, float m2, float m1, 
+float p0, 
+float p1, float p2, float p3, float p4, float p5, float p6){
+	if(x > 2.0f) return p6;
+	if(x > 1.0f   ) {float a=    x-1.0f    ; return p5+a*(p6-p5);}
+	if(x > 1.0f/2 ) {float a= 2*(x-1.0f/2 ); return p4+a*(p5-p4);}
+	if(x > 1.0f/4 ) {float a= 4*(x-1.0f/4 ); return p3+a*(p4-p3);}
+	if(x > 1.0f/8 ) {float a= 8*(x-1.0f/8 ); return p2+a*(p3-p2);}
+	if(x > 1.0f/16) {float a=16*(x-1.0f/16); return p1+a*(p2-p1);}
+	if(x > 0      ) {float a=16*(x        ); return p0+a*(p1-p0);}
+	if(x >-1.0f/16) {float a=16*(x+1.0f/16); return m1+a*(p0-m1);}
+	if(x >-1.0f/8 ) {float a=16*(x+1.0f/8 ); return m2+a*(m1-m2);}
+	if(x >-1.0f/4 ) {float a= 8*(x+1.0f/4 ); return m3+a*(m2-m3);}
+	if(x >-1.0f/2 ) {float a= 4*(x+1.0f/2 ); return m4+a*(m3-m4);}
+	if(x >-1.0f   ) {float a= 2*(x+1.0f/1 ); return m5+a*(m4-m5);}
+	if(x >-2      ) {float a= 1*(x+2      ); return m6+a*(m5-m6);}
+	return m6;
+}
+
+
 
 float get(int d){return v[(d+ind)&LENGTHMASK];}
 void set(int d, float x){v[(d+ind)&LENGTHMASK]=x;}

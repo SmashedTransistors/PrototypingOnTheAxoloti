@@ -46,14 +46,14 @@
       <params>
          <frac32.s.mapvsl name="h1" value="30.0"/>
          <frac32.s.mapvsl name="h2" value="-7.0"/>
-         <frac32.s.mapvsl name="h3" value="7.0"/>
-         <frac32.s.mapvsl name="h4" value="26.0"/>
-         <frac32.s.mapvsl name="h5" value="11.0"/>
-         <frac32.s.mapvsl name="h6" value="-20.0"/>
-         <frac32.s.mapvsl name="h7" value="-32.0"/>
-         <frac32.s.mapvsl name="h8" value="28.0"/>
+         <frac32.s.mapvsl name="h3" value="10.0"/>
+         <frac32.s.mapvsl name="h4" value="27.0"/>
+         <frac32.s.mapvsl name="h5" value="17.0"/>
+         <frac32.s.mapvsl name="h6" value="-21.0"/>
+         <frac32.s.mapvsl name="h7" value="-40.0"/>
+         <frac32.s.mapvsl name="h8" value="35.0"/>
          <frac32.s.mapvsl name="h9" value="0.0"/>
-         <frac32.s.mapvsl name="h10" value="53.0"/>
+         <frac32.s.mapvsl name="h10" value="58.0"/>
       </params>
       <attribs/>
    </obj>
@@ -243,7 +243,7 @@
    </patcher>
    <obj type="ctrl/i radio 4 h" uuid="f87ae81e3162014f3bdca0f56dbbdf9322e69dfd" name="i_1" x="210" y="308">
       <params>
-         <int32.hradio name="value" value="3"/>
+         <int32.hradio name="value" value="0"/>
       </params>
       <attribs/>
    </obj>
