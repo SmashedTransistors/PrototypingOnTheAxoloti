@@ -5,16 +5,16 @@
    </obj>
    <obj type="sl10s" uuid="1515bb32-3349-16c5-a22c-298378ebcfed" name="sl10s_1" x="112" y="0">
       <params>
-         <frac32.s.mapvsl name="h1" value="32.0"/>
-         <frac32.s.mapvsl name="h2" value="13.0"/>
-         <frac32.s.mapvsl name="h3" value="-26.0"/>
-         <frac32.s.mapvsl name="h4" value="-25.0"/>
-         <frac32.s.mapvsl name="h5" value="-20.0"/>
-         <frac32.s.mapvsl name="h6" value="54.0"/>
-         <frac32.s.mapvsl name="h7" value="-8.0"/>
-         <frac32.s.mapvsl name="h8" value="-56.0"/>
+         <frac32.s.mapvsl name="h1" value="29.0"/>
+         <frac32.s.mapvsl name="h2" value="16.0"/>
+         <frac32.s.mapvsl name="h3" value="8.0"/>
+         <frac32.s.mapvsl name="h4" value="-54.0"/>
+         <frac32.s.mapvsl name="h5" value="44.0"/>
+         <frac32.s.mapvsl name="h6" value="50.0"/>
+         <frac32.s.mapvsl name="h7" value="-50.0"/>
+         <frac32.s.mapvsl name="h8" value="-50.0"/>
          <frac32.s.mapvsl name="h9" value="-1.0"/>
-         <frac32.s.mapvsl name="h10" value="51.0"/>
+         <frac32.s.mapvsl name="h10" value="53.0"/>
       </params>
       <attribs/>
    </obj>
@@ -27,8 +27,8 @@
    </obj>
    <obj type="math/smooth2" uuid="9ba3ddec912512e6b63211080e89cb25b6d84834" name="smooth2_1" x="336" y="0">
       <params>
-         <frac32.u.map name="risetime" value="0.0"/>
-         <frac32.u.map name="falltime" value="0.0"/>
+         <frac32.u.map name="risetime" value="11.0"/>
+         <frac32.u.map name="falltime" value="56.5"/>
       </params>
       <attribs/>
    </obj>
@@ -39,7 +39,7 @@
    <obj type="sl10s" uuid="1515bb32-3349-16c5-a22c-298378ebcfed" name="sl10s_2" x="112" y="154">
       <params>
          <frac32.s.mapvsl name="h1" value="25.0"/>
-         <frac32.s.mapvsl name="h2" value="-6.0"/>
+         <frac32.s.mapvsl name="h2" value="-10.0"/>
          <frac32.s.mapvsl name="h3" value="38.0"/>
          <frac32.s.mapvsl name="h4" value="-7.0"/>
          <frac32.s.mapvsl name="h5" value="-13.0"/>
@@ -47,7 +47,7 @@
          <frac32.s.mapvsl name="h7" value="-33.0"/>
          <frac32.s.mapvsl name="h8" value="25.0"/>
          <frac32.s.mapvsl name="h9" value="1.0"/>
-         <frac32.s.mapvsl name="h10" value="55.0"/>
+         <frac32.s.mapvsl name="h10" value="52.0"/>
       </params>
       <attribs/>
    </obj>
@@ -61,17 +61,17 @@
    </obj>
    <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_3" x="0" y="308">
       <params>
-         <frac32.s.map name="pitch" value="0.0"/>
+         <frac32.s.map name="pitch" value="-1.0"/>
       </params>
       <attribs/>
    </obj>
-   <patcher type="patch/patcher" uuid="c87243cb-ad68-40d3-a8c6-6eaec5885348" name="patcher_1" x="98" y="308">
+   <patcher type="patch/patcher" uuid="782a78be-7f50-4207-bce4-cb013d27bedd" name="patcher_1" x="98" y="308">
       <params>
          <frac32.u.map name="*c_1" value="23.5"/>
-         <frac32.u.map name="mix_1" value="0.09999990463256836"/>
+         <frac32.u.map name="mix_1" value="0.2999997138977051"/>
       </params>
       <attribs>
-         <combo attributeName="poly" selection="6"/>
+         <combo attributeName="poly" selection="5"/>
       </attribs>
       <subpatch appVersion="1.0.12">
          <obj type="patch/inlet f" uuid="5c585d2dcd9c05631e345ac09626a22a639d7c13" name="inlet_1" x="0" y="0">
@@ -84,10 +84,10 @@
          </obj>
          <obj type="env/adsr" uuid="d1dbcc5fa6f87b98a6a91c87fd44acee5e690bac" name="adsr_1" x="168" y="0">
             <params>
-               <frac32.s.map name="a" value="-1.0"/>
+               <frac32.s.map name="a" value="-33.0"/>
                <frac32.s.map name="d" value="55.0"/>
                <frac32.u.map name="s" value="47.5"/>
-               <frac32.s.map name="r" value="-18.0"/>
+               <frac32.s.map name="r" value="-33.0"/>
             </params>
             <attribs/>
          </obj>
@@ -126,11 +126,31 @@
             </params>
             <attribs/>
          </obj>
-         <obj type="gain/vca" uuid="a9f2dcd18043e2f47364e45cb8814f63c2a37c0d" name="vca_1" x="308" y="210">
+         <obj type="osc/saw" uuid="739ecc36017ef3249479b8f01716b8bbfba9abc1" name="saw_2" x="294" y="210">
+            <params>
+               <frac32.s.map name="pitch" value="0.08999967575073242"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="osc/saw" uuid="739ecc36017ef3249479b8f01716b8bbfba9abc1" name="saw_3" x="392" y="210">
+            <params>
+               <frac32.s.map name="pitch" value="-0.1099996566772461"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="mix/mix 3" uuid="8be16f2156012a4a8974804178cece51555f272b" name="mix_2" x="518" y="210">
+            <params>
+               <frac32.u.map name="gain1" value="21.0"/>
+               <frac32.u.map name="gain2" value="15.5"/>
+               <frac32.u.map name="gain3" value="21.5"/>
+            </params>
+            <attribs/>
+         </obj>
+         <obj type="gain/vca" uuid="a9f2dcd18043e2f47364e45cb8814f63c2a37c0d" name="vca_1" x="616" y="210">
             <params/>
             <attribs/>
          </obj>
-         <obj type="patch/outlet a" uuid="abd8c5fd3b0524a6630f65cad6dc27f6c58e2a3e" name="outlet_1" x="378" y="210">
+         <obj type="patch/outlet a" uuid="abd8c5fd3b0524a6630f65cad6dc27f6c58e2a3e" name="outlet_1" x="686" y="210">
             <params/>
             <attribs/>
          </obj>
@@ -138,6 +158,7 @@
             <net>
                <source obj="keyb_1" outlet="note"/>
                <dest obj="mix_1" inlet="bus_in"/>
+               <dest obj="saw_3" inlet="pitch"/>
             </net>
             <net>
                <source obj="keyb_1" outlet="gate"/>
@@ -151,6 +172,7 @@
             <net>
                <source obj="mix_1" outlet="out"/>
                <dest obj="saw_1" inlet="pitch"/>
+               <dest obj="saw_2" inlet="pitch"/>
             </net>
             <net>
                <source obj="inlet_1" outlet="inlet"/>
@@ -170,16 +192,28 @@
                <dest obj="*_1" inlet="b"/>
             </net>
             <net>
-               <source obj="saw_1" outlet="wave"/>
-               <dest obj="vca_1" inlet="a"/>
-            </net>
-            <net>
                <source obj="*c_1" outlet="out"/>
                <dest obj="vca_1" inlet="v"/>
             </net>
             <net>
                <source obj="vca_1" outlet="o"/>
                <dest obj="outlet_1" inlet="outlet"/>
+            </net>
+            <net>
+               <source obj="mix_2" outlet="out"/>
+               <dest obj="vca_1" inlet="a"/>
+            </net>
+            <net>
+               <source obj="saw_3" outlet="wave"/>
+               <dest obj="mix_2" inlet="in3"/>
+            </net>
+            <net>
+               <source obj="saw_2" outlet="wave"/>
+               <dest obj="mix_2" inlet="in2"/>
+            </net>
+            <net>
+               <source obj="saw_1" outlet="wave"/>
+               <dest obj="mix_2" inlet="in1"/>
             </net>
          </nets>
          <settings>
@@ -200,7 +234,13 @@
          </windowPos>
       </subpatch>
    </patcher>
-   <obj type="TiaRTwo" uuid="c3a89b57-84b5-4147-81b0-eae3e8272768" name="TiaRTwo_1" x="224" y="308">
+   <obj type="ctrl/i radio 4 h" uuid="f87ae81e3162014f3bdca0f56dbbdf9322e69dfd" name="i_1" x="308" y="308">
+      <params>
+         <int32.hradio name="value" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="TiaRTwo" uuid="c3a89b57-84b5-4147-81b0-eae3e8272768" name="TiaRTwo_1" x="448" y="308">
       <params/>
       <attribs>
          <text attributeName="prog0">
@@ -223,30 +263,33 @@ hp1(25,0.01f);
 gain(25,mod[9]);]]></sText>
          </text>
          <text attributeName="prog1">
-            <sText><![CDATA[]]></sText>
+            <sText><![CDATA[
+]]></sText>
          </text>
          <text attributeName="prog2">
-            <sText><![CDATA[]]></sText>
+            <sText><![CDATA[
+]]></sText>
          </text>
          <text attributeName="prog3">
-            <sText><![CDATA[]]></sText>
+            <sText><![CDATA[
+]]></sText>
          </text>
          <combo attributeName="size" selection="2048"/>
          <combo attributeName="location" selection="ExtRAM"/>
          <objref attributeName="preset" obj="PresetInterp_1"/>
       </attribs>
    </obj>
-   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="364" y="308">
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="714" y="308">
       <params>
          <frac32.u.map name="value" value="50.5"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="tiar/gain/DCA" uuid="37123bac-a14b-430b-901f-cdecf31d394c" name="DCA_2" x="434" y="308">
+   <obj type="tiar/gain/DCA" uuid="37123bac-a14b-430b-901f-cdecf31d394c" name="DCA_2" x="784" y="308">
       <params/>
       <attribs/>
    </obj>
-   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="518" y="308">
+   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="868" y="308">
       <params/>
       <attribs/>
    </obj>
@@ -260,10 +303,6 @@ gain(25,mod[9]);]]></sText>
       <params/>
       <attribs/>
    </obj>
-   <obj type="sss/disp/MIDscope" uuid="e22193bf-a8b3-4166-b583-f3bb50c1b0ee" name="MIDscope_1" x="98" y="714">
-      <params/>
-      <attribs/>
-   </obj>
    <nets>
       <net>
          <source obj="keyb_1" outlet="note"/>
@@ -271,8 +310,12 @@ gain(25,mod[9]);]]></sText>
       </net>
       <net>
          <source obj="sine_1" outlet="wave"/>
-         <dest obj="MIDscope_1" inlet="syncIn"/>
          <dest obj="MIDscope_2" inlet="syncIn"/>
+      </net>
+      <net>
+         <source obj="TiaRTwo_1" outlet="y1"/>
+         <dest obj="MIDscope_2" inlet="in"/>
+         <dest obj="DCA_2" inlet="in"/>
       </net>
       <net>
          <source obj="DCA_2" outlet="out"/>
@@ -292,19 +335,17 @@ gain(25,mod[9]);]]></sText>
          <dest obj="smooth2_1" inlet="in"/>
       </net>
       <net>
-         <source obj="patcher_1" outlet="outlet_1"/>
-         <dest obj="MIDscope_1" inlet="in"/>
-         <dest obj="TiaRTwo_1" inlet="in1"/>
-      </net>
-      <net>
          <source obj="smooth2_1" outlet="out"/>
          <dest obj="dial_3" inlet="in"/>
          <dest obj="PresetInterp_1" inlet="alpha"/>
       </net>
       <net>
-         <source obj="TiaRTwo_1" outlet="y1"/>
-         <dest obj="DCA_2" inlet="in"/>
-         <dest obj="MIDscope_2" inlet="in"/>
+         <source obj="patcher_1" outlet="outlet_1"/>
+         <dest obj="TiaRTwo_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="i_1" outlet="out"/>
+         <dest obj="TiaRTwo_1" inlet="progSel"/>
       </net>
    </nets>
    <settings>
@@ -312,8 +353,8 @@ gain(25,mod[9]);]]></sText>
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>2364</x>
-      <y>0</y>
+      <x>2086</x>
+      <y>63</y>
       <width>1532</width>
       <height>1026</height>
    </windowPos>

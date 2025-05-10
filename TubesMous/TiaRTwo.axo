@@ -6,14 +6,19 @@
       <inlets>
          <frac32buffer name="in1"/>
          <frac32buffer name="in2"/>
+         <int32 name="progSel"/>
       </inlets>
       <outlets>
-         <frac32buffer name="out"/>
+         <frac32buffer name="y1"/>
+         <frac32buffer name="y2"/>
       </outlets>
       <displays/>
       <params/>
       <attribs>
-         <text name="function"/>
+         <text name="prog0"/>
+         <text name="prog1"/>
+         <text name="prog2"/>
+         <text name="prog3"/>
          <combo name="size">
             <MenuEntries>
                <string>256</string>
@@ -240,34 +245,21 @@ for(int i = 0; i < LENGTH; i++){
 ind&=LENGTHMASK;
 float x1=arm::q_to_float(inlet_in1,27);
 float x2=arm::q_to_float(inlet_in2,27);
-float y;
+float y1=0,y2=0;
 
 v[ind]=x1;
 
+if(inlet_progSel==1){
+  attr_prog1
+} else if(inlet_progSel==2){
+  attr_prog2
+} else if(inlet_progSel==3){
+  attr_prog3
+} else {
+  attr_prog0
+} 
 
-
-
-add(0,x2);
-
-rot( 0,50   ,0.25*mod[0]);
-rot( 3,50- 3,0.25*mod[1]);
-rot( 6,50- 6,0.25*mod[2]);
-rot( 8,50- 8,0.25*mod[3]);
-rot(12,50-12,0.25*mod[4]);
-rot(16,50-16,0.25*mod[5]);
-rot(18,50-18,0.25*mod[6]);
-rot(21,50-21,0.25*mod[7]);
-
-
-
-y=get(25);
-
-lp1(25,0.5f);
-//hp1(25,0.01f);
-gain(25,0.9f);
-
-
-
-outlet_out=arm::float_to_q(y,27);]]></code.srate>
+outlet_y1=arm::float_to_q(y1,27);
+outlet_y2=arm::float_to_q(y2,27);]]></code.srate>
    </obj.normal>
 </objdefs>
