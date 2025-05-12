@@ -84,7 +84,7 @@
          <frac32.s.map name="const" value="16.0"/>
          <frac32.s.map name="gain1" value="31.0"/>
          <frac32.s.map name="gain2" value="30.0"/>
-         <frac32.s.map name="gain3" value="-0.20000000298023224"/>
+         <frac32.s.map name="gain3" value="-0.19999980926513672"/>
       </params>
       <attribs/>
    </obj>
@@ -123,14 +123,14 @@
    </obj>
    <obj type="mix/mix 2" uuid="682ea5496ded046d981e26b720a6e7f8eca97541" name="mix_1" x="798" y="196">
       <params>
-         <frac32.u.map name="gain1" value="0.07000000029802322"/>
+         <frac32.u.map name="gain1" value="0.06999969482421875"/>
          <frac32.u.map name="gain2" value="2.0"/>
       </params>
       <attribs/>
    </obj>
    <obj type="osc/sine" uuid="6e094045cca76a9dbf7ebfa72e44e4700d2b3ba" name="sine_2" x="896" y="196">
       <params>
-         <frac32.s.map name="pitch" value="0.03999999910593033"/>
+         <frac32.s.map name="pitch" value="0.039999961853027344"/>
       </params>
       <attribs/>
    </obj>
@@ -149,15 +149,15 @@
          <frac32.s.mapvsl name="h5" value="1.0"/>
          <frac32.s.mapvsl name="h6" value="-1.0"/>
          <frac32.s.mapvsl name="h7" value="0.0"/>
-         <frac32.s.mapvsl name="h8" value="-21.0"/>
-         <frac32.s.mapvsl name="h9" value="12.0"/>
+         <frac32.s.mapvsl name="h8" value="30.0"/>
+         <frac32.s.mapvsl name="h9" value="18.0"/>
          <frac32.s.mapvsl name="h10" value="-35.0"/>
       </params>
       <attribs/>
    </obj>
    <obj type="ctrl/i radio 4 h" uuid="f87ae81e3162014f3bdca0f56dbbdf9322e69dfd" name="i_1" x="364" y="462">
       <params>
-         <int32.hradio name="value" value="0"/>
+         <int32.hradio name="value" value="2"/>
       </params>
       <attribs/>
    </obj>
@@ -188,39 +188,47 @@ gain(110,mod[9]);]]></sText>
          </text>
          <text attributeName="prog1">
             <sText><![CDATA[add(0,x2);
-rot( 0,26   ,0.25*mod[0]);
-rot( 2,26- 1,0.25*mod[1]);
-rot( 3,26- 3,0.25*mod[2]);
-rot( 4,26- 4,0.25*mod[3]);
-rot( 6,26- 6,0.25*mod[4]);
-rot( 8,26- 7,0.25*mod[5]);
-rot( 9,26- 8,0.25*mod[6]);
-rot(11,26-11,0.25*mod[7]);
 
-y1=get(13);
+float x=get(0)+get(20);
+x=nlSegs(x, 
+0.0   ,-0.03,-0.03 ,-0.03,-0.01,-0.01,
+0,
+0.05,0.03, 0.07, 0.1 ,0.05,  0.05);
+rotf( 0,220   ,0.25*mod[0]+x);
 
-lp1(13,0.5f);
-hp1(13,0.01f);
-gain(13,mod[9]);
-]]></sText>
+
+rotf( 0,220   ,0.25*mod[0]+x);
+
+rotf(90,130   ,0.25*mod[8]);
+rotf(140,173   ,0.25*mod[7]);
+
+y1=get(110);
+
+lp1(0,0.5f);
+hp1(0,0.01f);
+gain(110,mod[9]);]]></sText>
          </text>
          <text attributeName="prog2">
             <sText><![CDATA[add(0,x2);
-rot( 0,100   ,0.25*mod[0]);
-rot( 6,100- 4,0.25*mod[1]);
-rot(12,100-12,0.25*mod[2]);
-rot(16,100-16,0.25*mod[3]);
-rot(24,100-24,0.25*mod[4]);
-rot(32,100-32,0.25*mod[5]);
-rot(36,100-34,0.25*mod[6]);
-rot(42,100-42,0.25*mod[7]);
 
-y1=get(50);
+float x=get(0)+get(20);
+x=nlSegs(x, 
+0.0   ,-0.03,-0.03 ,-0.03,-0.01,-0.01,
+0,
+0.05,0.03, 0.07, 0.1 ,0.05,  0.05);
+rotff( 0,220   ,0.25*mod[0]+x);
 
-lp1(50,0.5f);
-hp1(50,0.01f);
-gain(50,mod[9]);
-]]></sText>
+
+rotff( 0,220   ,0.25*mod[0]+x);
+
+rotff(90,130   ,0.25*mod[8]);
+rotff(140,173   ,0.25*mod[7]);
+
+y1=get(110);
+
+lp1(0,0.5f);
+hp1(0,0.01f);
+gain(110,mod[9]);]]></sText>
          </text>
          <text attributeName="prog3">
             <sText><![CDATA[add(0,x2);

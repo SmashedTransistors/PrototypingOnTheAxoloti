@@ -63,6 +63,9 @@
          </combo>
          <objref name="preset"/>
       </attribs>
+      <includes>
+         <include>./sineft.h</include>
+      </includes>      
       <code.declaration><![CDATA[#if attr_location == 0
 	#define LOCATION
 #else
